@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Problem SPb](https://up.htmlacademy.ru/javascript/20/user/1267799).
-* Наставник: `Неизвестно`.
+* Наставник: Виталий Колесов.
 
 ---
 
