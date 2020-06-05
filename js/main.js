@@ -67,13 +67,16 @@ function generateAds(maxAdsNumber) {
 
   var ads = [];
   for (var i = 0; i < maxAdsNumber; i++) {
+    var x = getRandomIntInclusive(COORDINATE_X_MIN, COORDINATE_X_MAX);
+    var y = getRandomIntInclusive(COORDINATE_Y_MIN, COORDINATE_Y_MAX);
+
     ads.push({
       'author': {
         'avatar': 'img/avatars/user0' + (i + 1) + '.png'
       },
       'offer': {
         'title': getRandomIndex(TITLE),
-        'address': location.x + ', ' + location.y,
+        'address': x + ', ' + y,
         'price': getRandomIntInclusive(PRICE_MIN, PRICE_MAX),
         'type': getRandomIndex(TYPE),
         'rooms': getRandomIntInclusive(ROOMS_MIN, ROOMS_MAX),
@@ -85,8 +88,8 @@ function generateAds(maxAdsNumber) {
         'photos': getRandomIndex(PHOTOS)
       },
       'location': {
-        'x': getRandomIntInclusive(COORDINATE_X_MIN, COORDINATE_X_MAX),
-        'y': getRandomIntInclusive(COORDINATE_Y_MIN, COORDINATE_Y_MAX)
+        'x': x,
+        'y': y
       }
     });
   }
@@ -96,6 +99,7 @@ function generateAds(maxAdsNumber) {
 // переключение карту в активное состояние
 // убираем класс .map--faded
 var map = document.querySelector('.map');
+
 map.classList.remove('map--faded');
 
 var ads = generateAds(NUMBER_OF_ADS);
