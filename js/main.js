@@ -56,10 +56,10 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// получение рандомного индекса из массива
-function getRandomIndex(array) {
-  var index = Math.floor(Math.random() * array.length);
-  return array[index];
+// получение рандомного элемента из массива
+function getRandomElement(ads) {
+  var element = Math.floor(Math.random() * ads.length);
+  return ads[element];
 }
 
 // создание массива из имеющихся данных
@@ -75,17 +75,17 @@ function generateAds(maxAdsNumber) {
         'avatar': 'img/avatars/user0' + (i + 1) + '.png'
       },
       'offer': {
-        'title': getRandomIndex(TITLE),
+        'title': getRandomElement(TITLE),
         'address': x + ', ' + y,
         'price': getRandomIntInclusive(PRICE_MIN, PRICE_MAX),
-        'type': getRandomIndex(TYPE),
+        'type': getRandomElement(TYPE),
         'rooms': getRandomIntInclusive(ROOMS_MIN, ROOMS_MAX),
         'guests': getRandomIntInclusive(GUESTS_MIN, GUESTS_MAX),
-        'checkin': getRandomIndex(CHECKIN_OUT_TIME),
-        'checkout': getRandomIndex(CHECKIN_OUT_TIME),
-        'features': getRandomIndex(FEATURES),
-        'description': getRandomIndex(DESCRIPTION),
-        'photos': getRandomIndex(PHOTOS)
+        'checkin': getRandomElement(CHECKIN_OUT_TIME),
+        'checkout': getRandomElement(CHECKIN_OUT_TIME),
+        'features': getRandomElement(FEATURES),
+        'description': getRandomElement(DESCRIPTION),
+        'photos': getRandomElement(PHOTOS)
       },
       'location': {
         'x': x,
