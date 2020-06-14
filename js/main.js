@@ -157,9 +157,11 @@ var deactivatePage = function (map, fieldset, adFormFieldset, adFormMapFilters) 
   fieldset.disabled = true;
   adFormFieldset.disabled = true;
 
+  /* eslint-disable */
   for (var filter of adFormMapFilters) {
     filter.disabled = true;
   }
+  /* eslint-enable */
 }
 
 deactivatePage(map, fieldset, adFormFieldset, adFormMapFilters);
