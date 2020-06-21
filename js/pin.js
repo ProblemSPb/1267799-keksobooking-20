@@ -2,10 +2,11 @@
 
 (function () {
 
-  var TOKIO_MAP = document.querySelector('.map');
+  // Пин по дифолту
+  var defaultSerachPin = document.querySelector('.map__pin--main');
 
   window.pin = {
-    tokioMap: TOKIO_MAP,
+    defaultSerachPin: defaultSerachPin,
     createPin: function (ad) {
       var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
       var PIN_SIZE = [50, 70];
@@ -37,7 +38,7 @@
       // и для Y если неактивен
       var yCenter = Math.round(top - SEARCH_PIN_SIZE[1] / 2);
       // Y если пин активен
-      if (!(TOKIO_MAP.classList.contains('map--faded'))) {
+      if (!(window.map.tokioMap.classList.contains('map--faded'))) {
         yCenter = Math.round(top - (SEARCH_PIN_SIZE[1] + 22) / 2);
       }
 
