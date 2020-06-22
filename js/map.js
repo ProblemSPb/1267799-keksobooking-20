@@ -21,14 +21,19 @@
       window.map.tokioMap.classList.remove('map--faded');
       fieldset.disabled = false;
 
-      // создаем пины
-      var ads = window.data.generateAds(NUMBER_OF_ADS);
+      window.load(function (response) {
 
-      for (var i = 0; i < NUMBER_OF_ADS; i++) {
-        // eslint-disable-next-line no-undef
-        fragment.appendChild(window.pin.createPin(ads[i]));
-      }
-      listElement.appendChild(fragment);
+        // создаем пины
+        var ads = response;
+
+        for (var i = 0; i < NUMBER_OF_ADS; i++) {
+          fragment.appendChild(window.pin.createPin(ads[i]));
+        }
+        listElement.appendChild(fragment);
+      }, function (message) {
+        // eslint-disable-next-line no-console
+        console.error(message);
+      });
     }
   };
 
