@@ -35,9 +35,6 @@
         // создаем пины
         var ads = response;
 
-        console.log(typeof ads);
-        console.log(ads);
-
         for (var i = 0; i < NUMBER_OF_ADS; i++) {
           fragment.appendChild(window.pin.createPin(ads[i]));
         }
