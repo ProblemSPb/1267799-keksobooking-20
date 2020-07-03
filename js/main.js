@@ -25,3 +25,13 @@ clickPin.addEventListener('keyup', function (evt) {
 
 // console.log(ads);
 // console.warn(map, map.getBoundingClientRect().x);
+
+// disable button
+// show loader
+
+// check response
+// 0 results - ? hide loader
+// error - hide loader
+// success - activate map, activate form
+// hide loader
+// enable button
