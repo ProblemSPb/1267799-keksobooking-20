@@ -8,9 +8,10 @@
   window.map.housingType.addEventListener('change', function () {
     selectedFilter = window.map.housingType.value;
 
-    // скрыть карточку объявления
-    window.card.closePopUp();
-
+    // скрыть открытую карточку объявления, если показана
+    if (document.querySelector('.popup')) {
+      window.card.closePopUp();
+    }
     // удалить старые пины
     var pins = document.querySelectorAll('.pin__ads');
     for (var i = 0; i < pins.length; i++) {
@@ -34,8 +35,9 @@
         });
       }
 
-      console.log(ads);
+      // console.log(ads);
 
+      // если результат выдачи меньше 5, то показываем сколько есть
       var numberOfFilteredAds = window.map.numberOfAds;
       var adsLength = Object.keys(ads).length;
 
