@@ -14,6 +14,7 @@
 
   window.map = {
     tokioMap: TOKIO_MAP,
+    fieldset: fieldset,
     numberOfAds: NUMBER_OF_ADS,
     housingType: housingType,
     listElement: listElement,
@@ -50,7 +51,7 @@
         mainPin.classList.remove('pin__ads');
 
         // показ карточки объявления
-        TOKIO_MAP.insertBefore(window.card.openPopUp(ads), fieldset);
+        TOKIO_MAP.insertBefore(window.card.openPopUp(ads[0]), fieldset);
 
       }, function (message) {
         // eslint-disable-next-line no-console

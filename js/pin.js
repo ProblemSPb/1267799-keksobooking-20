@@ -18,6 +18,17 @@
       pin.querySelector('img').src = ad.author.avatar;
       pin.querySelector('img').alt = ad.offer.title;
 
+      pin.addEventListener('mousedown', function (evt) {
+        if (typeof evt === 'object' && evt.button === 0) {
+          if (document.querySelector('.popup')) {
+            document.querySelector('.popup').remove();
+          }
+          console.log('клик по пину');
+          window.map.tokioMap.insertBefore(window.card.openPopUp(ad), window.map.fieldset);
+        }
+      });
+
+
       return pin;
     },
 

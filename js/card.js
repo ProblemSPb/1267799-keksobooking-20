@@ -36,14 +36,19 @@
   }
 
   // создание карточки объявления
-  function openPopUp(ads) {
+  function openPopUp(ad) {
 
     // var { offer, author } = ads[0];
 
-    var offer = ads[0].offer;
-    var author = ads[0].author;
+    // var offer = ads[0].offer;
+    // var author = ads[0].author;
 
-    if (ads.length > 0) {
+    var offer = ad.offer;
+    var author = ad.author;
+
+    // if (ads.length > 0) {
+    if (ad) {
+
       var templateAdCard = document.querySelector('#card').content.querySelector('.popup');
       var adCard = templateAdCard.cloneNode(true);
 
