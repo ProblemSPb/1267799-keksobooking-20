@@ -23,17 +23,17 @@
 
   // функция проверки features в объявлении
   // если такой фичи в объявлении нет, соответствующий li тег будет удален из html
-  function checkFeatures(offer, feature, adCard) {
-    if (!(offer.features.find(currentValue => currentValue === feature))) {
-      adCard.querySelector('.popup__feature--' + feature).parentNode.removeChild(adCard.querySelector('.popup__feature--' + feature));
-    }
-  }
-
   // function checkFeatures(offer, feature, adCard) {
-  //   if (offer.features.indexOf(feature) === -1) {
+  //   if (!(offer.features.find(currentValue => currentValue === feature))) {
   //     adCard.querySelector('.popup__feature--' + feature).parentNode.removeChild(adCard.querySelector('.popup__feature--' + feature));
   //   }
   // }
+
+  function checkFeatures(offer, feature, adCard) {
+    if (offer.features.indexOf(feature) === -1) {
+      adCard.querySelector('.popup__feature--' + feature).parentNode.removeChild(adCard.querySelector('.popup__feature--' + feature));
+    }
+  }
 
   // создание карточки объявления
   function openPopUp(ads) {
