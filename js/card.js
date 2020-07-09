@@ -2,90 +2,95 @@
 
 (function () {
 
+  // функция определения типа жилья в объявлении
+  // и добавления этого типа к popup карточке
+  function detectHousingType(adItem, element) {
+    switch (adItem) {
+      case (adItem === 'flat'):
+        element.querySelector('.popup__type').innerHTML = 'Квартира';
+        break;
+      case (adItem === 'bungalo'):
+        element.querySelector('.popup__type').innerHTML = 'Бунгало';
+        break;
+      case (adItem === 'house'):
+        element.querySelector('.popup__type').innerHTML = 'Дом';
+        break;
+      case (adItem === 'palace'):
+        element.querySelector('.popup__type').innerHTML = 'Дворец';
+        break;
+    }
+  }
+
+  // функция проверки features в объявлении
+  // если такой фичи в объявлении нет, соответствующий li тег будет удален из html
+  function checkFeatures(offer, feature, adCard) {
+    if (!(offer.features.find(currentValue => currentValue === feature))) {
+      adCard.querySelector('.popup__feature--' + feature).parentNode.removeChild(adCard.querySelector('.popup__feature--' + feature));
+    }
+  }
+
   // создание карточки объявления
   function openPopUp(ads) {
+
+    var { offer, author } = ads[0];
 
     if (ads.length > 0) {
       var templateAdCard = document.querySelector('#card').content.querySelector('.popup');
       var adCard = templateAdCard.cloneNode(true);
 
-      adCard.querySelector('.popup__title').innerHTML = ads[0].offer.title;
-      adCard.querySelector('.popup__text--address').innerHTML = ads[0].offer.address;
-      adCard.querySelector('.popup__text--price').innerHTML = ads[0].offer.price + '₽/ночь';
+      adCard.querySelector('.popup__title').innerHTML = offer.title;
+      adCard.querySelector('.popup__text--address').innerHTML = offer.address;
+      adCard.querySelector('.popup__text--price').innerHTML = offer.price + '₽/ночь';
 
       // Тип жилья
-      switch (ads[0].offer.type) {
-        case (ads[0].offer.type === 'flat'):
-          adCard.querySelector('.popup__type').innerHTML = 'Квартира';
-          break;
-        case (ads[0].offer.type === 'bungalo'):
-          adCard.querySelector('.popup__type').innerHTML = 'Бунгало';
-          break;
-        case (ads[0].offer.type === 'house'):
-          adCard.querySelector('.popup__type').innerHTML = 'Дом';
-          break;
-        case (ads[0].offer.type === 'palace'):
-          adCard.querySelector('.popup__type').innerHTML = 'Дворец';
-          break;
-      }
+      detectHousingType(offer.type, adCard);
 
-      adCard.querySelector('.popup__text--capacity').innerHTML = ads[0].offer.rooms + ' комнаты для ' + ads[0].offer.guests + ' гостей';
-      adCard.querySelector('.popup__text--time').innerHTML = 'Заезд после ' + ads[0].offer.checkin + ', выезд до ' + ads[0].offer.checkout;
-      // если какой-то features нет в объявлении, удалить соотвествующий li
-      if (ads[0].offer.features.indexOf('wifi') === -1) {
-        adCard.querySelector('.popup__feature--wifi').parentNode.removeChild(adCard.querySelector('.popup__feature--wifi'));
-      }
-      if (ads[0].offer.features.indexOf('dishwasher') === -1) {
-        adCard.querySelector('.popup__feature--dishwasher').parentNode.removeChild(adCard.querySelector('.popup__feature--dishwasher'));
-      }
-      if (ads[0].offer.features.indexOf('parking') === -1) {
-        adCard.querySelector('.popup__feature--parking').parentNode.removeChild(adCard.querySelector('.popup__feature--parking'));
-      }
-      if (ads[0].offer.features.indexOf('washer') === -1) {
-        adCard.querySelector('.popup__feature--washer').parentNode.removeChild(adCard.querySelector('.popup__feature--washer'));
-      }
-      if (ads[0].offer.features.indexOf('elevator') === -1) {
-        adCard.querySelector('.popup__feature--elevator').parentNode.removeChild(adCard.querySelector('.popup__feature--elevator'));
-      }
-      if (ads[0].offer.features.indexOf('conditioner') === -1) {
-        adCard.querySelector('.popup__feature--conditioner').parentNode.removeChild(adCard.querySelector('.popup__feature--conditioner'));
-      }
+      adCard.querySelector('.popup__text--capacity').innerHTML = offer.rooms + ' комнаты для ' + offer.guests + ' гостей';
+      adCard.querySelector('.popup__text--time').innerHTML = 'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
+
+      checkFeatures(offer, 'wifi', adCard);
+      checkFeatures(offer, 'dishwasher', adCard);
+      checkFeatures(offer, 'parking', adCard);
+      checkFeatures(offer, 'washer', adCard);
+      checkFeatures(offer, 'elevator', adCard);
+      checkFeatures(offer, 'conditioner', adCard);
 
       // если есть description, то показать; иначе - удалить
-      if (ads[0].offer.description) {
-        adCard.querySelector('.popup__description').innerHTML = ads[0].offer.description;
+      if (offer.description) {
+        adCard.querySelector('.popup__description').innerHTML = offer.description;
       } else {
         adCard.querySelector('.popup__description').parentNode.removeChild(adCard.querySelector('.popup__description'));
 
       }
 
-      // добавить фотки из массива
-      adCard.querySelector('.popup__photo').src = ads[0].offer.photos[0];
-      // если больше 1 фото, добавить img элементы для каждого дополнительного фото
-      if (ads[0].offer.photos.length > 1) {
+      // если фото нет, удаляем тег, если есть - показываем фотки
+      if (offer.photos.length === 0) {
+        adCard.querySelector('.popup__photo').parentNode.removeChild(adCard.querySelector('.popup__photo'));
+      } else {
+        adCard.querySelector('.popup__photo').src = offer.photos[0];
+        // если больше 1 фото, добавить img элементы для каждого дополнительного фото
         var imgElement = adCard.querySelector('.popup__photo');
 
-        for (var i = 1; i < ads[0].offer.photos.length; i++) {
+        for (var i = 1; i < offer.photos.length; i++) {
           var newImg = imgElement.cloneNode(true);
-          newImg.src = ads[0].offer.photos[i];
+          newImg.src = offer.photos[i];
           adCard.querySelector('.popup__photos').appendChild(newImg);
         }
       }
 
-      adCard.querySelector('.popup__avatar').src = ads[0].author.avatar;
-
+      adCard.querySelector('.popup__avatar').src = author.avatar;
     }
 
     // закрыть карточку при клике на крестик
-    var clickCross = adCard.querySelector('.popup__close');
+    var cross = adCard.querySelector('.popup__close');
     // если нажата левая кнопка мыши
-    clickCross.addEventListener('mousedown', function (evt) {
+    cross.addEventListener('mousedown', function (evt) {
       if (typeof evt === 'object' && evt.button === 0) {
         window.card.closePopUp();
       }
     });
     // если нажат enter
-    clickCross.addEventListener('keyup', function (evt) {
+    cross.addEventListener('keyup', function (evt) {
       if (evt.keyCode === 13) {
         window.card.closePopUp();
       }
@@ -94,7 +99,6 @@
     return adCard;
 
   }
-
 
   // скрытие карточки объявления
   function closePopUp() {
