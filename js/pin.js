@@ -23,7 +23,6 @@
           if (document.querySelector('.popup')) {
             document.querySelector('.popup').remove();
           }
-          console.log('клик по пину');
           window.map.tokioMap.insertBefore(window.card.openPopUp(ad), window.map.fieldset);
         }
       });
