@@ -12,9 +12,9 @@
   var listElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
 
-
   window.map = {
     tokioMap: TOKIO_MAP,
+    fieldset: fieldset,
     numberOfAds: NUMBER_OF_ADS,
     housingType: housingType,
     listElement: listElement,
@@ -38,6 +38,7 @@
         for (var i = 0; i < NUMBER_OF_ADS; i++) {
           fragment.appendChild(window.pin.createPin(ads[i]));
         }
+
         listElement.appendChild(fragment);
 
         var newPins = document.querySelectorAll('.map__pin');
@@ -48,6 +49,9 @@
 
         var mainPin = document.querySelector('.map__pin--main');
         mainPin.classList.remove('pin__ads');
+
+        // показ карточки объявления
+        TOKIO_MAP.insertBefore(window.card.openPopUp(ads[0]), fieldset);
 
       }, function (message) {
         // eslint-disable-next-line no-console
