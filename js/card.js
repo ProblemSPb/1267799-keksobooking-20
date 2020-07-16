@@ -38,15 +38,9 @@
   // создание карточки объявления
   function openPopUp(ad) {
 
-    // var { offer, author } = ads[0];
-
-    // var offer = ads[0].offer;
-    // var author = ads[0].author;
-
     var offer = ad.offer;
     var author = ad.author;
 
-    // if (ads.length > 0) {
     if (ad) {
 
       var templateAdCard = document.querySelector('#card').content.querySelector('.popup');
@@ -103,9 +97,9 @@
         window.card.closePopUp();
       }
     });
-    // если нажат enter
-    cross.addEventListener('keyup', function (evt) {
-      if (evt.keyCode === 13) {
+    // если нажат esc
+    document.addEventListener('keyup', function (evt) {
+      if (evt.keyCode === 27) {
         window.card.closePopUp();
       }
     });
@@ -117,7 +111,10 @@
   // скрытие карточки объявления
   function closePopUp() {
     var openedCard = document.querySelector('.popup');
-    openedCard.parentNode.removeChild(openedCard);
+
+    if (openedCard) {
+      openedCard.parentNode.removeChild(openedCard);
+    }
   }
 
   window.card = {

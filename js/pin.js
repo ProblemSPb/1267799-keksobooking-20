@@ -18,6 +18,7 @@
       pin.querySelector('img').src = ad.author.avatar;
       pin.querySelector('img').alt = ad.offer.title;
 
+      // если кликнуть на выбранный пин
       pin.addEventListener('mousedown', function (evt) {
         if (typeof evt === 'object' && evt.button === 0) {
           if (document.querySelector('.popup')) {
@@ -27,6 +28,15 @@
         }
       });
 
+      // если нажат enter при выбранном пине
+      pin.addEventListener('keyup', function (evt) {
+        if (evt.keyCode === 13) {
+          if (document.querySelector('.popup')) {
+            document.querySelector('.popup').remove();
+          }
+          window.map.tokioMap.insertBefore(window.card.openPopUp(ad), window.map.fieldset);
+        }
+      });
 
       return pin;
     },
