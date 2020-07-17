@@ -11,7 +11,7 @@
   // поле "Адрес"
   // Адрес по дифолту
   var addressField = document.querySelector('#address');
-  addressField.value = window.pin.getPosition(window.pin.defaultSerachPin);
+  addressField.value = 601 + ', ' + 459;
 
   // поле "Тип Жилья"
   var housingType = document.querySelector('#type');
@@ -125,9 +125,6 @@
       mainFormFilters.forEach(function (mainFormfilter) {
         mainFormfilter.disabled = false;
       });
-
-      // асайниит новый адрес пину после активации
-      addressField.value = window.pin.getPosition(window.pin.defaultSerachPin);
     }
   };
 })();
