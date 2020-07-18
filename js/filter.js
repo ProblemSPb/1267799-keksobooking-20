@@ -46,12 +46,10 @@
       }
 
       // отрендерить новые
-      // var listElement = document.querySelector('.map__pins');
-      // var fragment = document.createDocumentFragment();
       for (var j = 0; j < numberOfFilteredAds; j++) {
         window.map.fragment.appendChild(window.pin.createPin(ads[j]));
       }
-      window.map.listElement.appendChild(window.map.fragment);
+      window.map.mapLayout.appendChild(window.map.fragment);
 
       var newPins = document.querySelectorAll('.map__pin');
 

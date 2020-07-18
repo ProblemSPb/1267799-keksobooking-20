@@ -9,7 +9,7 @@
   // Фильтрация объявлений - тип жилья
   var housingType = document.querySelector('#housing-type');
 
-  var listElement = document.querySelector('.map__pins');
+  var mapLayout = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
 
   window.map = {
@@ -17,15 +17,13 @@
     fieldset: fieldset,
     numberOfAds: NUMBER_OF_ADS,
     housingType: housingType,
-    listElement: listElement,
+    mapLayout: mapLayout,
     fragment: fragment,
     deactivateMap: function deactivateMap() {
       window.map.tokioMap.classList.add('map--faded');
       fieldset.disabled = true;
     },
     activateMap: function activateMap() {
-      // var listElement = document.querySelector('.map__pins');
-      // var fragment = document.createDocumentFragment();
 
       window.map.tokioMap.classList.remove('map--faded');
       fieldset.disabled = false;
@@ -39,7 +37,7 @@
           fragment.appendChild(window.pin.createPin(ads[i]));
         }
 
-        listElement.appendChild(fragment);
+        mapLayout.appendChild(fragment);
 
         var newPins = document.querySelectorAll('.map__pin');
 
