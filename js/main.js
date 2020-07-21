@@ -1,7 +1,6 @@
 'use strict';
 
 // деактивируем страницу по дифолту
-// window.page.deactivatePage();
 window.map.deactivateMap();
 window.form.deactivateForm();
 

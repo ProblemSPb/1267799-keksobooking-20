@@ -3,10 +3,10 @@
 (function () {
 
   // форма добавления нового объявления
-  var fieldset = document.querySelector('fieldset');
+  // var fieldset = document.querySelector('fieldset');
   var adForm = document.querySelector('.ad-form');
-  var adFormFieldset = adForm.querySelector('fieldset');
-  var mainFormFilters = document.querySelectorAll('.map__filter');
+  // var adFormFieldset = adForm.querySelector('fieldset');
+  // var mainFormFilters = document.querySelectorAll('.map__filter');
 
   // поле "Адрес"
   // Адрес по дифолту
@@ -108,23 +108,52 @@
     validateRoomsGuests();
   });
 
-  window.form = {
-    deactivateForm: function deactivateForm() {
-      fieldset.disabled = true;
-      adFormFieldset.disabled = true;
+  // кнопка очистки формы
+  var resetButton = document.querySelector('.ad-form__reset');
+  resetButton.addEventListener('keyup', function (evt) {
+    if (evt.keyCode === 27) {
+      window.form.clearForm();
+    }
+  });
 
-      mainFormFilters.forEach(function (mainFormfilter) {
-        mainFormfilter.disabled = true;
-      });
+  window.form = {
+    adForm: adForm,
+    clearForm: function clearForm() {
+      document.querySelector('#title').value = 'Милая, уютная квартирка в центре Токио';
+      document.querySelector('#address').value = '601, 459';
+      document.querySelector('#type').value = 'flat';
+      document.querySelector('#price').value = '1000';
+      document.querySelector('#timein').value = '12:00';
+      document.querySelector('#timeout').value = '12:00';
+      document.querySelector('#room_number').value = '1';
+      document.querySelector('#capacity').value = '1';
+      document.querySelector('#description').value = 'Здесь расскажите о том, какое ваше жилье замечательное и вообще';
+
+      // возвращает все чекбоксы в положение unchecked
+      var featureCheckbox = document.querySelectorAll('.feature__checkbox');
+      for (var j = 0; j < featureCheckbox.length; j++) {
+        // eslint-disable-next-line no-unused-expressions
+        featureCheckbox[j].checked = false;
+      }
+    },
+    deactivateForm: function deactivateForm() {
+      // fieldset.disabled = true;
+      // adFormFieldset.disabled = true;
+
+      // mainFormFilters.forEach(function (mainFormfilter) {
+      //   mainFormfilter.disabled = true;
+      // });
+      var formTag = document.querySelector('.ad-form');
+      formTag.classList.add('ad-form--disabled');
     },
     activateForm: function activateForm() {
-      fieldset.disabled = false;
-      adFormFieldset.disabled = false;
+      // fieldset.disabled = false;
+      // adFormFieldset.disabled = false;
       adForm.classList.remove('ad-form--disabled');
 
-      mainFormFilters.forEach(function (mainFormfilter) {
-        mainFormfilter.disabled = false;
-      });
+      // mainFormFilters.forEach(function (mainFormfilter) {
+      //   mainFormfilter.disabled = false;
+      // });
     }
   };
 })();
